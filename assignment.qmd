@@ -1,6 +1,6 @@
 ---
 title: "R Assignment #3"
-author: "Put Your Name Here"
+author: "Samiha Farooqi"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -43,10 +43,9 @@ Write your code using grouping in the chunks below to help answer the following 
 1)  How many members in the dataset favor impeachment vs. not (using the `for_impeachment` column)?
 
 ```{r}
-
-
-
-
+impeach %>% 
+  group_by(for_impeachment) %>% 
+  summarise(for_impeach_count = n())
 
 
 ```
@@ -57,27 +56,15 @@ You'll want to ensure you do the grouping on both columns together, e.g. `group_
 
 ```{r}
 
-
-
-
-
-
-
-
-
+impeach %>% 
+  group_by(for_impeachment, gdp_above_national) %>% 
+  summarise(for_impeach_count = n())
 
 ```
 
 3)  Now do the same as #2, but this time instead of GDP, group by whether the district is above or below the national average for the percentage of college graduates. The column that captures this information is `pct_bachelors_compared_to_national`.
 
 ```{r}
-
-
-
-
-
-
-
 
 
 
