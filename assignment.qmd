@@ -105,26 +105,25 @@ impeach %>%
 
 ```{r}
 
-  
-
-
-
-
-
+  impeach %>% 
+  filter(for_impeachment == "YES") %>% 
+  group_by(margin_flag_2018) %>% 
+  summarise(yes_impeach_count = n())
 
 
 ```
 
 7)  Come up with another breakdown of your choosing for how you'd like to examine this dataset. Say what you'll look at, and then put the code below to find the answer.
 
+Does median income of a district, and whether or not it is above or below the national average, effect whether or not a House member voted yes or no? 
+I'll test this by taking the mean of median income above or below the average.
+
 ```{r}
 
-  
-
-
-
-
-
+impeach %>% 
+  group_by(for_impeachment, median_age_compared_to_national) %>% 
+  summarise(impeach_count = n(), 
+            mean_income = mean(median_income, na.rm = TRUE))
 
 
 ```
@@ -135,13 +134,9 @@ Use the mutate() function to create two new columns: one that extracts the year 
 
 ```{r}
 
-  
-
-
-
-
-
-
+impeach %>%
+  mutate(year = year(date_announced),
+         month = month(date_announced))
 
 ```
 
@@ -149,13 +144,12 @@ Use the mutate() function to create two new columns: one that extracts the year 
 
 ```{r}
 
-  
-
-
-
-
-
-
+impeach %>%
+  mutate(year = year(date_announced),
+         month = month(date_announced)) %>% 
+  filter(for_impeachment == "YES") %>%
+  group_by(month) %>%
+  summarise(impeach_count = n())
 
 ```
 
